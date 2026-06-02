@@ -17,10 +17,7 @@ export const useRegister = () => {
     mutationFn: authEndpoints.register,
 
     onSuccess: (response) => {
-      localStorage.setItem(
-        "auth_token",
-        response.accessToken
-      );
+      localStorage.setItem("auth_token", response.accessToken);
     },
   });
 };
@@ -29,23 +26,23 @@ export const useRegister = () => {
 export const useLogin = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<AuthResponse, Error, LoginDto>({
-    mutationFn: async(data) => {
-      const response = await axiosInstance.post<{message:string}>(`https://corridor-daylight-skating.ngrok-free.dev/auth/login`, data, {
-        withCredentials: true,
-      });
+  return useMutation<any, Error, LoginDto>({
+    mutationFn: async (data) => {
+      const response = await axiosInstance.post<{ message: string }>(
+        `https://corridor-daylight-skating.ngrok-free.dev/auth/login`,
+        data,
+        {
+          withCredentials: true,
+        },
+      );
       return response;
     },
 
     onSuccess: (response) => {
-      localStorage.setItem(
-        "auth_token",
-        response.accessToken
-      );
-
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.AUTH.ME],
-      });
+      // localStorage.setItem("auth_token", response.accessToken);
+      // queryClient.invalidateQueries({
+      //   queryKey: [QUERY_KEYS.AUTH.ME],
+      // });
     },
   });
 };
