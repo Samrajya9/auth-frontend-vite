@@ -1,8 +1,6 @@
 import axios from "axios";
 import type {
-  AxiosError,
   AxiosInstance,
-  InternalAxiosRequestConfig,
 } from "axios";
 import { envConfig } from "../config/env.config";
 
@@ -14,39 +12,34 @@ const axiosInstance: AxiosInstance = axios.create({
     "Content-Type": "application/json",
     Accept: "application/json",
   },
+  withCredentials: true, // Include cookies for cross-origin requests
+
 });
 
 // ── Request Interceptor ───────────────────────────────────────────────────
-axiosInstance.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem("auth_token");
+// axiosInstance.interceptors.request.use(
+//   (config: InternalAxiosRequestConfig) => {
 
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-
-    return config;
-  },
-  (error: AxiosError) => {
-    return Promise.reject(error);
-  }
-);
+//     return config;
+//   },
+//   (error: AxiosError) => {
+//     return Promise.reject(error);
+//   }
+// );
 
 // ── Response Interceptor ──────────────────────────────────────────────────
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error: AxiosError) => {
-    const status = error.response?.status;
+// axiosInstance.interceptors.response.use(
+//   (response) => response,
+//   (error: AxiosError) => {
+//     const status = error.response?.status;
 
-    if (status === 401) {
-      localStorage.removeItem("auth_token");
+//     if (status === 401) {
+//       // hard redirect (simple but effective)
+//       window.location.href = "/login";
+//     }
 
-      // hard redirect (simple but effective)
-      window.location.href = "/login";
-    }
-
-    return Promise.reject(error);
-  }
-);
+//     return Promise.reject(error);
+//   }
+// );
 
 export default axiosInstance;

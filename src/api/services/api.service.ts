@@ -11,7 +11,6 @@ const apiService = {
     const response = await axiosInstance.get<T>(url, { params , headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      withCredentials: true,
     },});
     return response.data;
   },
@@ -20,9 +19,7 @@ const apiService = {
     url: string,
     data: D = {} as D
   ): ApiResponse<T> {
-    const response = await axiosInstance.post<T>(url, data, {
-        withCredentials: true,
-      });
+    const response = await axiosInstance.post<T>(url, data);
     return response.data;
   },
 

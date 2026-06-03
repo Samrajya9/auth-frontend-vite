@@ -1,5 +1,8 @@
+import axiosInstance from "@/lib/axios.lib";
 import apiService from "../services/api.service";
 import type { AuthResponse, LoginDto, RegisterDto, User } from "./auth.types";
+import axios from "axios";
+
 
 const AUTH_BASE = "/auth";
 
@@ -19,8 +22,7 @@ export const authEndpoints = {
   logout: () =>
     apiService.post<void>(`${AUTH_BASE}/logout`),
 
-  getMe: () =>
-    apiService.get<User>(`${AUTH_BASE}/me`,{
+  getMe: async () =>
+    apiService.get<User>(`${AUTH_BASE}/me`),
 
-    }),
 };

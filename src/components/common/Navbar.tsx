@@ -4,6 +4,7 @@ import { useLogout, useMe } from '../../hooks/useAuth.hook'
 const Navbar = () => {
   const { data: user } = useMe()
   const { mutate: logout } = useLogout()
+  console.log("Navbar user:", user);
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
