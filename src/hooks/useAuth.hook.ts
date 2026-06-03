@@ -16,8 +16,7 @@ export const useRegister = () => {
   return useMutation<AuthResponse, Error, RegisterDto>({
     mutationFn: authEndpoints.register,
 
-    onSuccess: (response) => {
-    },
+    onSuccess: (response) => {},
   });
 };
 

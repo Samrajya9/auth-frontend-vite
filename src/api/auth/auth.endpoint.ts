@@ -3,26 +3,16 @@ import apiService from "../services/api.service";
 import type { AuthResponse, LoginDto, RegisterDto, User } from "./auth.types";
 import axios from "axios";
 
-
 const AUTH_BASE = "/auth";
 
 export const authEndpoints = {
   register: (data: RegisterDto) =>
-    apiService.post<AuthResponse, RegisterDto>(
-      `${AUTH_BASE}/register`,
-      data
-    ),
+    apiService.post<AuthResponse, RegisterDto>(`${AUTH_BASE}/register`, data),
 
   login: (data: LoginDto) =>
-    apiService.post<AuthResponse, LoginDto>(
-      `${AUTH_BASE}/login`,
-      data 
-    ),
+    apiService.post<AuthResponse, LoginDto>(`${AUTH_BASE}/login`, data),
 
-  logout: () =>
-    apiService.post<void>(`${AUTH_BASE}/logout`),
+  logout: () => apiService.post<void>(`${AUTH_BASE}/logout`),
 
-  getMe: async () =>
-    apiService.get<User>(`${AUTH_BASE}/me`),
-
+  getMe: async () => apiService.get<User>(`${AUTH_BASE}/me`),
 };
